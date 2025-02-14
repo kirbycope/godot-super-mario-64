@@ -587,7 +587,7 @@ _data = {
 "idle": SubResource("Animation_87ne4")
 }
 
-[node name="mario_head" type="Node3D"]
+[node name="MarioHead" type="Node3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 script = ExtResource("1_id0bt")
 

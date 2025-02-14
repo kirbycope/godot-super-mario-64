@@ -1,12 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://lg8kqq335jcd"]
+[gd_scene load_steps=22 format=3 uid="uid://lg8kqq335jcd"]
 
-[ext_resource type="AudioStream" uid="uid://bggm05xc2650j" path="res://assets/title_theme.ogg" id="1_3en1h"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_10pj2"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="1_ixcat"]
 [ext_resource type="Texture2D" uid="uid://brq4y2alqwd81" path="res://assets/background.png" id="1_s2ug0"]
 [ext_resource type="Texture2D" uid="uid://caegykti7xpjl" path="res://assets/hand_opened.png" id="1_udygu"]
 [ext_resource type="PackedScene" uid="uid://cmprp1rcxydys" path="res://scenes/mario_head.tscn" id="2_dr1hs"]
 [ext_resource type="Texture2D" uid="uid://c5t7vah356o3g" path="res://assets/press_start.png" id="2_y5da1"]
 [ext_resource type="Script" path="res://scenes/press_start.gd" id="3_rx8vp"]
+[ext_resource type="PackedScene" uid="uid://dsv53ycxt5yyv" path="res://scenes/logo.tscn" id="6_jb7pg"]
+[ext_resource type="Texture2D" uid="uid://c3t7y4uslojjv" path="res://assets/logo/1996.bmp" id="7_ircae"]
+[ext_resource type="Texture2D" uid="uid://0s7hw1auchcd" path="res://assets/logo/tm.bmp" id="8_lf6ib"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ak5p8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,19 +23,46 @@ background_mode = 2
 sky = SubResource("Sky_wrbe3")
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lg6jm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blb50"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dy2tn"]
+material = SubResource("StandardMaterial3D_blb50")
+size = Vector2(16, 8)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lou4j"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("7_ircae")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7cl7b"]
+material = SubResource("StandardMaterial3D_lou4j")
+size = Vector2(0.128, 0.016)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd45q"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("8_lf6ib")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hub4g"]
+material = SubResource("StandardMaterial3D_hd45q")
+size = Vector2(0.016, 0.016)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yex0u"]
 albedo_texture = ExtResource("1_s2ug0")
 uv1_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d6epv"]
-material = SubResource("StandardMaterial3D_lg6jm")
+material = SubResource("StandardMaterial3D_yex0u")
 size = Vector2(16, 8)
 orientation = 2
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_10pj2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_3en1h")
 autoplay = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -66,10 +96,29 @@ grow_vertical = 0
 texture = ExtResource("2_y5da1")
 script = ExtResource("3_rx8vp")
 
+[node name="Blackground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+mesh = SubResource("PlaneMesh_dy2tn")
+
+[node name="Logo" parent="." instance=ExtResource("6_jb7pg")]
+transform = Transform3D(-2.18557e-09, 0, 0.05, 0.012941, 0.0482963, 5.65667e-10, -0.0482963, 0.012941, -2.1111e-09, 0, -0.5, -2)
+
+[node name="1996" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.1, -0.2)
+visible = false
+mesh = SubResource("PlaneMesh_7cl7b")
+
+[node name="TM" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0.11, 0.05, -0.2)
+visible = false
+mesh = SubResource("PlaneMesh_hub4g")
+
 [node name="Background" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+visible = false
 mesh = SubResource("PlaneMesh_d6epv")
 skeleton = NodePath("../Camera3D")
 
-[node name="mario_head" parent="." instance=ExtResource("2_dr1hs")]
+[node name="MarioHead" parent="." instance=ExtResource("2_dr1hs")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1.5)
+visible = false
