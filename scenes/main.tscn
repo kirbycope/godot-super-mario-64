@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://lg8kqq335jcd"]
+[gd_scene load_steps=13 format=3 uid="uid://lg8kqq335jcd"]
 
 [ext_resource type="AudioStream" uid="uid://bggm05xc2650j" path="res://assets/title_theme.ogg" id="1_3en1h"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="1_ixcat"]
@@ -26,17 +26,7 @@ uv1_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d6epv"]
 material = SubResource("StandardMaterial3D_lg6jm")
-size = Vector2(8, 6)
-orientation = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0iftw"]
-transparency = 1
-albedo_texture = ExtResource("2_y5da1")
-texture_filter = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_vv8cj"]
-material = SubResource("StandardMaterial3D_0iftw")
-size = Vector2(0.325, 0.17)
+size = Vector2(16, 8)
 orientation = 2
 
 [node name="Main" type="Node3D"]
@@ -65,6 +55,17 @@ offset_bottom = 32.0
 texture = ExtResource("1_udygu")
 script = ExtResource("1_ixcat")
 
+[node name="PressStart" type="TextureRect" parent="Camera3D/CanvasLayer"]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -102.0
+offset_right = 195.0
+grow_vertical = 0
+texture = ExtResource("2_y5da1")
+script = ExtResource("3_rx8vp")
+
 [node name="Background" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
 mesh = SubResource("PlaneMesh_d6epv")
@@ -72,8 +73,3 @@ skeleton = NodePath("../Camera3D")
 
 [node name="mario_head" parent="." instance=ExtResource("2_dr1hs")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1.5)
-
-[node name="PressStart" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.889897, -0.5, -0.8)
-mesh = SubResource("PlaneMesh_vv8cj")
-script = ExtResource("3_rx8vp")

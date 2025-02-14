@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends TextureRect
 
 @export var toggle_interval: float = 1.0
 
