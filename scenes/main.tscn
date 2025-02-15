@@ -118,7 +118,7 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("6_r5d0d")
 
 [node name="Blackground" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 mesh = SubResource("PlaneMesh_dy2tn")
 
 [node name="Logo" parent="." instance=ExtResource("6_jb7pg")]
@@ -135,8 +135,7 @@ visible = false
 mesh = SubResource("PlaneMesh_hub4g")
 
 [node name="Background" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 mesh = SubResource("PlaneMesh_d6epv")
 skeleton = NodePath("../Camera3D")
 

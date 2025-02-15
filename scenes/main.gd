@@ -15,6 +15,7 @@ const TITLE_THEME = preload("res://assets/title_theme.ogg")
 @onready var press_start = $Camera3D/CanvasLayer/PressStart
 @onready var transition = $Camera3D/CanvasLayer/Transition
 @onready var mario_head = $MarioHead
+@onready var animation_player = $MarioHead/AnimationPlayer
 
 func _ready():
 	logo.visible = true
@@ -56,6 +57,7 @@ func start_sequence():
 		mario_head.visible = true
 		transition.visible = true
 		transition.reveal()
+		animation_player.play("hello")
 	)
 	tween.tween_interval(0.5)
 	tween.tween_callback(func():

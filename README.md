@@ -1,7 +1,7 @@
 ![Thumbnail](/ci/thumbnail.png)
 
 # godot-super-mario-64
-A remake of Super Mario 64 using the Godot Game Engine.
+A remake of Super Mario 64's opening scene using the Godot Game Engine.
 
 <details>
 <summary>Using Addons</summary>
