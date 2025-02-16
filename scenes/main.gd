@@ -13,7 +13,7 @@ const TITLE_THEME = preload("res://assets/title_theme.ogg")
 @onready var background = $Background
 @onready var cursor = $Camera3D/CanvasLayer/Cursor
 @onready var press_start = $Camera3D/CanvasLayer/PressStart
-@onready var transition = $Camera3D/CanvasLayer/Transition
+@onready var transition = $Camera3D/CanvasLayer/Transition/TransitionOverlay
 @onready var mario_head = $MarioHead
 @onready var animation_player = $MarioHead/AnimationPlayer
 
@@ -50,13 +50,13 @@ func start_sequence():
 	tween.tween_callback(func():
 		logo_1996.visible = false
 		logo_tm.visible = false
+		transition.start_transition()
 	)
 	tween.tween_property(logo, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(func():
 		background.visible = true
 		mario_head.visible = true
 		transition.visible = true
-		transition.reveal()
 		animation_player.play("hello")
 	)
 	tween.tween_interval(0.5)

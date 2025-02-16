@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://lg8kqq335jcd"]
+[gd_scene load_steps=23 format=3 uid="uid://lg8kqq335jcd"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_10pj2"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="1_ixcat"]
@@ -8,8 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c5t7vah356o3g" path="res://assets/press_start.png" id="2_y5da1"]
 [ext_resource type="Script" path="res://scenes/press_start.gd" id="3_rx8vp"]
 [ext_resource type="PackedScene" uid="uid://dsv53ycxt5yyv" path="res://scenes/logo.tscn" id="6_jb7pg"]
-[ext_resource type="Shader" path="res://scenes/color_rect.gdshader" id="6_njovl"]
-[ext_resource type="Script" path="res://scenes/color_rect.gd" id="6_r5d0d"]
+[ext_resource type="Script" path="res://scenes/transition_overlay.gd" id="6_vbosg"]
 [ext_resource type="Texture2D" uid="uid://c3t7y4uslojjv" path="res://assets/logo/1996.bmp" id="7_ircae"]
 [ext_resource type="Texture2D" uid="uid://0s7hw1auchcd" path="res://assets/logo/tm.bmp" id="8_lf6ib"]
 
@@ -24,12 +23,6 @@ sky_material = SubResource("ProceduralSkyMaterial_ak5p8")
 background_mode = 2
 sky = SubResource("Sky_wrbe3")
 tonemap_mode = 2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fw1j"]
-shader = ExtResource("6_njovl")
-shader_parameter/progress = 0.0
-shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/smoothness = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blb50"]
 albedo_color = Color(0, 0, 0, 1)
@@ -106,16 +99,24 @@ grow_vertical = 0
 texture = ExtResource("2_y5da1")
 script = ExtResource("3_rx8vp")
 
-[node name="Transition" type="ColorRect" parent="Camera3D/CanvasLayer"]
+[node name="Transition" type="Control" parent="Camera3D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TransitionOverlay" type="ColorRect" parent="Camera3D/CanvasLayer/Transition"]
 visible = false
-material = SubResource("ShaderMaterial_5fw1j")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
-script = ExtResource("6_r5d0d")
+script = ExtResource("6_vbosg")
 
 [node name="Blackground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
