@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://lg8kqq335jcd"]
+[gd_scene load_steps=32 format=3 uid="uid://lg8kqq335jcd"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_10pj2"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="1_ixcat"]
@@ -11,7 +11,14 @@
 [ext_resource type="Shader" path="res://scenes/color_rect.gdshader" id="6_njovl"]
 [ext_resource type="Script" path="res://scenes/color_rect.gd" id="6_r5d0d"]
 [ext_resource type="Texture2D" uid="uid://c3t7y4uslojjv" path="res://assets/logo/1996.bmp" id="7_ircae"]
+[ext_resource type="Texture2D" uid="uid://duk17f1bs8dlk" path="res://assets/button_a.png" id="8_5sk17"]
 [ext_resource type="Texture2D" uid="uid://0s7hw1auchcd" path="res://assets/logo/tm.bmp" id="8_lf6ib"]
+[ext_resource type="Texture2D" uid="uid://bpsoq6jsxkcxl" path="res://assets/button_b.png" id="9_s4h7i"]
+[ext_resource type="Texture2D" uid="uid://c4igu4f6r2s1m" path="res://assets/button_c_down.png" id="10_lpho8"]
+[ext_resource type="Texture2D" uid="uid://d3c74kfj508qc" path="res://assets/button_c_left.png" id="11_cophd"]
+[ext_resource type="Texture2D" uid="uid://i43gooad0e4u" path="res://assets/button_c_right.png" id="12_px3pm"]
+[ext_resource type="Texture2D" uid="uid://da6vefs113yiy" path="res://assets/button_c_up.png" id="13_qsosf"]
+[ext_resource type="Texture2D" uid="uid://iqk43cvc2drv" path="res://assets/button_r.png" id="14_0pyyc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ak5p8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -87,13 +94,6 @@ environment = SubResource("Environment_hky2q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
 
-[node name="Cursor" type="TextureRect" parent="Camera3D/CanvasLayer"]
-visible = false
-offset_right = 32.0
-offset_bottom = 32.0
-texture = ExtResource("1_udygu")
-script = ExtResource("1_ixcat")
-
 [node name="PressStart" type="TextureRect" parent="Camera3D/CanvasLayer"]
 visible = false
 texture_filter = 1
@@ -116,6 +116,141 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("6_r5d0d")
+
+[node name="Cursor" type="TextureRect" parent="Camera3D/CanvasLayer"]
+visible = false
+texture_filter = 1
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_udygu")
+script = ExtResource("1_ixcat")
+
+[node name="Buttons" type="Control" parent="Camera3D/CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -128.0
+offset_right = -192.0
+offset_bottom = -88.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ButtonA" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+visible = false
+layout_mode = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 240.0
+offset_bottom = 256.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_5sk17")
+
+[node name="ButtonB" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_s4h7i")
+
+[node name="ButtonCDown" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -16.0
+offset_right = 256.0
+offset_bottom = 148.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_lpho8")
+
+[node name="ButtonCLeft" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 208.0
+offset_bottom = 100.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("11_cophd")
+
+[node name="ButtonCRight" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = -64.0
+offset_right = 304.0
+offset_bottom = 100.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("12_px3pm")
+
+[node name="ButtonCUp" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -112.0
+offset_right = 256.0
+offset_bottom = 52.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("13_qsosf")
+
+[node name="ButtonL" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonR" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = -240.0
+offset_right = 279.0
+offset_bottom = -127.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("14_0pyyc")
+
+[node name="PhysicalControls" type="RichTextLabel" parent="Camera3D/CanvasLayer/Buttons"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -5.0
+offset_top = -592.0
+offset_right = 192.0
+offset_bottom = -431.0
+grow_horizontal = 0
+bbcode_enabled = true
+text = "[b]Controls:[/b]
+C Buttons - Rotate
+B - Zoom
+Touch - Pinch
+Touch+Drag - Deform
+R+Touch+Drag - Hold
+
+"
+fit_content = true
+scroll_active = false
+
+[node name="TouchControls" type="RichTextLabel" parent="Camera3D/CanvasLayer"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -197.0
+offset_bottom = 161.0
+grow_horizontal = 0
+bbcode_enabled = true
+text = "[b]Controls:[/b]
+WASD - Rotate
+Space - Zoom
+Click - Pinch
+Click+Drag - Deform
+Shift+Click+Drag - Hold
+
+"
+fit_content = true
+scroll_active = false
 
 [node name="Blackground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
@@ -142,3 +277,15 @@ skeleton = NodePath("../Camera3D")
 [node name="MarioHead" parent="." instance=ExtResource("2_dr1hs")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1.5)
 visible = false
+
+[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonB" to="." method="_on_button_b_button_down"]
+[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_button_down"]
+[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_button_up"]
+[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCLeft" to="." method="_on_button_c_left_button_down"]
+[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCLeft" to="." method="_on_button_c_left_button_up"]
+[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCRight" to="." method="_on_button_c_right_button_down"]
+[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCRight" to="." method="_on_button_c_right_button_up"]
+[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCUp" to="." method="_on_button_c_up_button_down"]
+[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCUp" to="." method="_on_button_c_up_button_up"]
+[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonR" to="." method="_on_button_r_button_down"]
+[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonR" to="." method="_on_button_r_button_up"]
