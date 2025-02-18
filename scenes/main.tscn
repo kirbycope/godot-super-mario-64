@@ -118,7 +118,6 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("6_r5d0d")
 
 [node name="Cursor" type="TextureRect" parent="Camera3D/CanvasLayer"]
-visible = false
 texture_filter = 1
 offset_right = 32.0
 offset_bottom = 32.0
@@ -126,113 +125,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_udygu")
 script = ExtResource("1_ixcat")
 
-[node name="Buttons" type="Control" parent="Camera3D/CanvasLayer"]
-visible = false
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -232.0
-offset_top = -128.0
-offset_right = -192.0
-offset_bottom = -88.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="ButtonA" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-visible = false
-layout_mode = 0
-offset_left = 48.0
-offset_top = 48.0
-offset_right = 240.0
-offset_bottom = 256.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("8_5sk17")
-
-[node name="ButtonB" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("9_s4h7i")
-
-[node name="ButtonCDown" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-layout_mode = 0
-offset_left = 112.0
-offset_top = -16.0
-offset_right = 256.0
-offset_bottom = 148.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("10_lpho8")
-
-[node name="ButtonCLeft" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = -64.0
-offset_right = 208.0
-offset_bottom = 100.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("11_cophd")
-
-[node name="ButtonCRight" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-layout_mode = 0
-offset_left = 160.0
-offset_top = -64.0
-offset_right = 304.0
-offset_bottom = 100.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("12_px3pm")
-
-[node name="ButtonCUp" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-layout_mode = 0
-offset_left = 112.0
-offset_top = -112.0
-offset_right = 256.0
-offset_bottom = 52.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("13_qsosf")
-
-[node name="ButtonL" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ButtonR" type="TextureButton" parent="Camera3D/CanvasLayer/Buttons"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = -240.0
-offset_right = 279.0
-offset_bottom = -127.0
-scale = Vector2(0.6, 0.6)
-texture_normal = ExtResource("14_0pyyc")
-
-[node name="PhysicalControls" type="RichTextLabel" parent="Camera3D/CanvasLayer/Buttons"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -5.0
-offset_top = -592.0
-offset_right = 192.0
-offset_bottom = -431.0
-grow_horizontal = 0
-bbcode_enabled = true
-text = "[b]Controls:[/b]
-C Buttons - Rotate
-B - Zoom
-Touch - Pinch
-Touch+Drag - Deform
-R+Touch+Drag - Hold
-
-"
-fit_content = true
-scroll_active = false
-
-[node name="TouchControls" type="RichTextLabel" parent="Camera3D/CanvasLayer"]
+[node name="KeyboardControls" type="RichTextLabel" parent="Camera3D/CanvasLayer"]
 visible = false
 anchors_preset = 1
 anchor_left = 1.0
@@ -252,6 +145,78 @@ Shift+Click+Drag - Hold
 fit_content = true
 scroll_active = false
 
+[node name="TouchControls" type="RichTextLabel" parent="Camera3D/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -197.0
+offset_bottom = 161.0
+grow_horizontal = 0
+bbcode_enabled = true
+text = "[b]Controls:[/b]
+C Buttons - Rotate
+B - Zoom
+Touch - Pinch
+Touch+Drag - Deform
+
+"
+fit_content = true
+scroll_active = false
+
+[node name="Buttons" type="Control" parent="Camera3D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -504.0
+offset_top = -280.0
+offset_right = -504.0
+offset_bottom = -280.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="ButtonA" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+visible = false
+position = Vector2(64, 64)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_5sk17")
+
+[node name="ButtonB" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_s4h7i")
+
+[node name="ButtonCDown" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+position = Vector2(136, 8)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_lpho8")
+
+[node name="ButtonCLeft" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+position = Vector2(80, -48)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("11_cophd")
+
+[node name="ButtonCRight" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+position = Vector2(192, -48)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("12_px3pm")
+
+[node name="ButtonCUp" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+position = Vector2(136, -104)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("13_qsosf")
+
+[node name="ButtonL" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+visible = false
+
+[node name="ButtonR" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
+visible = false
+position = Vector2(24, -208)
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("14_0pyyc")
+
 [node name="Blackground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 mesh = SubResource("PlaneMesh_dy2tn")
@@ -261,12 +226,10 @@ transform = Transform3D(-2.18557e-09, 0, 0.05, 0.012941, 0.0482963, 5.65667e-10,
 
 [node name="1996" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.1, -0.2)
-visible = false
 mesh = SubResource("PlaneMesh_7cl7b")
 
 [node name="TM" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0.11, 0.05, -0.2)
-visible = false
 mesh = SubResource("PlaneMesh_hub4g")
 
 [node name="Background" type="MeshInstance3D" parent="."]
@@ -278,14 +241,14 @@ skeleton = NodePath("../Camera3D")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1.5)
 visible = false
 
-[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonB" to="." method="_on_button_b_button_down"]
-[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_button_down"]
-[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_button_up"]
-[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCLeft" to="." method="_on_button_c_left_button_down"]
-[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCLeft" to="." method="_on_button_c_left_button_up"]
-[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCRight" to="." method="_on_button_c_right_button_down"]
-[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCRight" to="." method="_on_button_c_right_button_up"]
-[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonCUp" to="." method="_on_button_c_up_button_down"]
-[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonCUp" to="." method="_on_button_c_up_button_up"]
-[connection signal="button_down" from="Camera3D/CanvasLayer/Buttons/ButtonR" to="." method="_on_button_r_button_down"]
-[connection signal="button_up" from="Camera3D/CanvasLayer/Buttons/ButtonR" to="." method="_on_button_r_button_up"]
+[connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonB" to="." method="_on_button_b_pressed"]
+[connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_pressed"]
+[connection signal="released" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_released"]
+[connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonCLeft" to="." method="_on_button_c_left_pressed"]
+[connection signal="released" from="Camera3D/CanvasLayer/Buttons/ButtonCLeft" to="." method="_on_button_c_left_released"]
+[connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonCRight" to="." method="_on_button_c_right_pressed"]
+[connection signal="released" from="Camera3D/CanvasLayer/Buttons/ButtonCRight" to="." method="_on_button_c_right_released"]
+[connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonCUp" to="." method="_on_button_c_up_pressed"]
+[connection signal="released" from="Camera3D/CanvasLayer/Buttons/ButtonCUp" to="." method="_on_button_c_up_released"]
+[connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonR" to="." method="_on_button_r_pressed"]
+[connection signal="released" from="Camera3D/CanvasLayer/Buttons/ButtonR" to="." method="_on_button_r_released"]

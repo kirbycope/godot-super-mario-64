@@ -11,6 +11,7 @@ const TITLE_THEME = preload("res://assets/title_theme.ogg")
 @onready var background = $Background
 @onready var buttons: Control = $Camera3D/CanvasLayer/Buttons
 @onready var cursor = $Camera3D/CanvasLayer/Cursor
+@onready var keyboard_controls: RichTextLabel = $Camera3D/CanvasLayer/KeyboardControls
 @onready var logo = $Logo/logo
 @onready var logo_1996 = $"1996"
 @onready var logo_tm = $TM
@@ -19,26 +20,33 @@ const TITLE_THEME = preload("res://assets/title_theme.ogg")
 @onready var transition = $Camera3D/CanvasLayer/Transition
 @onready var touch_controls: RichTextLabel = $Camera3D/CanvasLayer/TouchControls
 
+var show_controls: bool = false
+
 
 func _input(event: InputEvent) -> void:
-	if press_start.visible:
+	if show_controls:
 		if event is InputEventScreenDrag or event is InputEventScreenTouch:
-			buttons.show()
-			touch_controls.hide()
+			buttons.visible = true
+			keyboard_controls.visible = false
+			touch_controls.visible = true
 		else:
-			buttons.hide()
-			touch_controls.show()
+			buttons.visible = false
+			keyboard_controls.visible = true
+			touch_controls.visible = false
 
 
 func _ready():
+	background.visible = false
+	buttons.visible = false
+	cursor.visible = false
+	keyboard_controls.visible = false
 	logo.visible = true
 	logo.scale = Vector3.ZERO
 	logo_1996.visible = false
 	logo_tm.visible = false
-	background.visible = false
-	cursor.visible = false
-	press_start.visible = false
 	mario_head.visible = false
+	press_start.visible = false
+	touch_controls.visible = false
 	start_sequence()
 
 
@@ -82,48 +90,47 @@ func start_sequence():
 		audio_player.play()
 		audio_player_3d.stream = HELLO
 		audio_player_3d.play()
+		show_controls = true
 	)
 
 
-func _on_button_b_button_down() -> void:
+func _on_button_b_pressed() -> void:
 	mario_head.switch_zoom_level()
 
 
-func _on_button_c_down_button_down() -> void:
+func _on_button_c_down_pressed() -> void:
 	Input.action_press("rotate_down")
 
 
-func _on_button_c_down_button_up() -> void:
+func _on_button_c_down_released() -> void:
 	Input.action_release("rotate_down")
 
-
-func _on_button_c_left_button_down() -> void:
+func _on_button_c_left_pressed() -> void:
 	Input.action_press("rotate_left")
 
 
-func _on_button_c_left_button_up() -> void:
+func _on_button_c_left_released() -> void:
 	Input.action_release("rotate_left")
 
 
-func _on_button_c_right_button_down() -> void:
+func _on_button_c_right_pressed() -> void:
 	Input.action_press("rotate_right")
 
 
-func _on_button_c_right_button_up() -> void:
+func _on_button_c_right_released() -> void:
 	Input.action_release("rotate_right")
 
 
-func _on_button_c_up_button_down() -> void:
+func _on_button_c_up_pressed() -> void:
 	Input.action_press("rotate_up")
 
 
-func _on_button_c_up_button_up() -> void:
+func _on_button_c_up_released() -> void:
 	Input.action_release("rotate_up")
 
-
-func _on_button_r_button_down() -> void:
+func _on_button_r_pressed() -> void:
 	Input.action_press("hold")
 
 
-func _on_button_r_button_up() -> void:
+func _on_button_r_released() -> void:
 	Input.action_release("hold")
