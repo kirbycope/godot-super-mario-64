@@ -27,15 +27,20 @@ func _input(event: InputEvent) -> void:
 	if show_controls:
 		if event is InputEventScreenDrag or event is InputEventScreenTouch:
 			buttons.visible = true
+			cursor.visible = false
 			keyboard_controls.visible = false
 			touch_controls.visible = true
 		else:
 			buttons.visible = false
+			cursor.visible = true
 			keyboard_controls.visible = true
 			touch_controls.visible = false
 
 
 func _ready():
+	for button in $Camera3D/CanvasLayer/Buttons.get_children():
+		if button is TouchScreenButton:
+			button.add_to_group("touch_buttons")
 	background.visible = false
 	buttons.visible = false
 	cursor.visible = false

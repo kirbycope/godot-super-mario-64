@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://lg8kqq335jcd"]
+[gd_scene load_steps=33 format=3 uid="uid://lg8kqq335jcd"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_10pj2"]
 [ext_resource type="Script" path="res://scenes/cursor.gd" id="1_ixcat"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c3t7y4uslojjv" path="res://assets/logo/1996.bmp" id="7_ircae"]
 [ext_resource type="Texture2D" uid="uid://duk17f1bs8dlk" path="res://assets/button_a.png" id="8_5sk17"]
 [ext_resource type="Texture2D" uid="uid://0s7hw1auchcd" path="res://assets/logo/tm.bmp" id="8_lf6ib"]
+[ext_resource type="Script" path="res://scenes/button_container.gd" id="8_tlvno"]
 [ext_resource type="Texture2D" uid="uid://bpsoq6jsxkcxl" path="res://assets/button_b.png" id="9_s4h7i"]
 [ext_resource type="Texture2D" uid="uid://c4igu4f6r2s1m" path="res://assets/button_c_down.png" id="10_lpho8"]
 [ext_resource type="Texture2D" uid="uid://d3c74kfj508qc" path="res://assets/button_c_left.png" id="11_cophd"]
@@ -170,13 +171,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -504.0
-offset_top = -280.0
-offset_right = -504.0
-offset_bottom = -280.0
+offset_left = -480.0
+offset_top = -136.0
+offset_right = -480.0
+offset_bottom = -136.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(2, 2)
+script = ExtResource("8_tlvno")
 
 [node name="ButtonA" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
 visible = false
@@ -212,7 +214,6 @@ texture_normal = ExtResource("13_qsosf")
 visible = false
 
 [node name="ButtonR" type="TouchScreenButton" parent="Camera3D/CanvasLayer/Buttons"]
-visible = false
 position = Vector2(24, -208)
 scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("14_0pyyc")
