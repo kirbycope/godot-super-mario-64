@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cmprp1rcxydys" path="res://scenes/mario_head.tscn" id="2_dr1hs"]
 [ext_resource type="Texture2D" uid="uid://c5t7vah356o3g" path="res://assets/press_start.png" id="2_y5da1"]
 [ext_resource type="Script" path="res://scenes/press_start.gd" id="3_rx8vp"]
+[ext_resource type="Script" path="res://scenes/transition_overlay.gd" id="5_nx7eg"]
 [ext_resource type="PackedScene" uid="uid://dsv53ycxt5yyv" path="res://scenes/logo.tscn" id="6_jb7pg"]
-[ext_resource type="Shader" path="res://scenes/color_rect.gdshader" id="6_njovl"]
-[ext_resource type="Script" path="res://scenes/color_rect.gd" id="6_r5d0d"]
 [ext_resource type="Texture2D" uid="uid://c3t7y4uslojjv" path="res://assets/logo/1996.bmp" id="7_ircae"]
 [ext_resource type="Texture2D" uid="uid://duk17f1bs8dlk" path="res://assets/button_a.png" id="8_5sk17"]
 [ext_resource type="Texture2D" uid="uid://0s7hw1auchcd" path="res://assets/logo/tm.bmp" id="8_lf6ib"]
@@ -33,8 +32,33 @@ background_mode = 2
 sky = SubResource("Sky_wrbe3")
 tonemap_mode = 2
 
+[sub_resource type="Shader" id="Shader_0tt1x"]
+code = "shader_type canvas_item;
+
+uniform float progress : hint_range(0.0, 1.0) = 0.0;
+uniform vec2 center = vec2(0.5, 0.5);
+uniform float smoothness : hint_range(0.0, 1.0) = 0.1;
+
+void fragment() {
+
+	// Convert UV to centered coordinates
+	vec2 uv = UV - center;
+
+	// Calculate distance from center
+	float dist = length(uv);
+
+	// Create smooth circle transition
+	// Multiply by 2 to make the circle expand from center to corners
+	float circle = smoothstep(progress * 2.0, progress * 2.0 + smoothness, dist);
+
+	// Output the alpha value
+	COLOR = vec4(0.0, 0.0, 0.0, circle);
+
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5fw1j"]
-shader = ExtResource("6_njovl")
+shader = SubResource("Shader_0tt1x")
 shader_parameter/progress = 0.0
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/smoothness = 0.1
@@ -96,7 +120,6 @@ environment = SubResource("Environment_hky2q")
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
 
 [node name="PressStart" type="TextureRect" parent="Camera3D/CanvasLayer"]
-visible = false
 texture_filter = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -116,7 +139,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
-script = ExtResource("6_r5d0d")
+script = ExtResource("5_nx7eg")
 
 [node name="Cursor" type="TextureRect" parent="Camera3D/CanvasLayer"]
 texture_filter = 1
@@ -127,7 +150,6 @@ texture = ExtResource("1_udygu")
 script = ExtResource("1_ixcat")
 
 [node name="KeyboardControls" type="RichTextLabel" parent="Camera3D/CanvasLayer"]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -240,7 +262,6 @@ skeleton = NodePath("../Camera3D")
 
 [node name="MarioHead" parent="." instance=ExtResource("2_dr1hs")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -1.5)
-visible = false
 
 [connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonB" to="." method="_on_button_b_pressed"]
 [connection signal="pressed" from="Camera3D/CanvasLayer/Buttons/ButtonCDown" to="." method="_on_button_c_down_pressed"]

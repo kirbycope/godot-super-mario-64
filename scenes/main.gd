@@ -23,20 +23,36 @@ const TITLE_THEME = preload("res://assets/title_theme.ogg")
 var show_controls: bool = false
 
 
+## Called once for every event before _unhandled_input(), allowing you to consume some events.
 func _input(event: InputEvent) -> void:
+
+	# Check if show controls is enabled
 	if show_controls:
+
+		# Check if the event is a screen drag or touch event
 		if event is InputEventScreenDrag or event is InputEventScreenTouch:
+
+			# Show the touch controls
 			buttons.visible = true
+			touch_controls.visible = true
+
+			# Hide the keyboard and mouse controls
 			cursor.visible = false
 			keyboard_controls.visible = false
-			touch_controls.visible = true
+
+		# The event is not a screen drag or touch event
 		else:
+
+			# Hide the touch controls
 			buttons.visible = false
-			cursor.visible = true
-			keyboard_controls.visible = true
 			touch_controls.visible = false
 
+			# Show the keyboard and mouse controls
+			cursor.visible = true
+			keyboard_controls.visible = true
 
+
+## Called when the node enters the scene tree for the first time.
 func _ready():
 	for button in $Camera3D/CanvasLayer/Buttons.get_children():
 		if button is TouchScreenButton:
@@ -55,6 +71,7 @@ func _ready():
 	start_sequence()
 
 
+## Runs the "start" sequence.
 func start_sequence():
 	audio_player.stream = COIN
 	audio_player.play()
@@ -83,14 +100,14 @@ func start_sequence():
 		background.visible = true
 		mario_head.visible = true
 		transition.visible = true
-		transition.reveal()
-		animation_player.play("hello")
+		transition.start_transition()
 	)
-	tween.tween_interval(0.5)
+	tween.tween_interval(1.0)
 	tween.tween_callback(func():
 		cursor.visible = true
 		press_start.visible = true
 		press_start.start_toggle()
+		animation_player.play("hello")
 		audio_player.stream = TITLE_THEME
 		audio_player.play()
 		audio_player_3d.stream = HELLO
@@ -99,43 +116,55 @@ func start_sequence():
 	)
 
 
+## [b] button is _pressed_.
 func _on_button_b_pressed() -> void:
 	mario_head.switch_zoom_level()
 
 
+## [c-down] button is _pressed_.
 func _on_button_c_down_pressed() -> void:
 	Input.action_press("rotate_down")
 
 
+## [c-down] button is _released_.
 func _on_button_c_down_released() -> void:
 	Input.action_release("rotate_down")
 
+
+## [c-left] button is _pressed_.
 func _on_button_c_left_pressed() -> void:
 	Input.action_press("rotate_left")
 
 
+## [c-left] button is _released_.
 func _on_button_c_left_released() -> void:
 	Input.action_release("rotate_left")
 
 
+## [c-right] button is _pressed_.
 func _on_button_c_right_pressed() -> void:
 	Input.action_press("rotate_right")
 
 
+## [c-right] button is _released_.
 func _on_button_c_right_released() -> void:
 	Input.action_release("rotate_right")
 
 
+## [c-up] button is _pressed_.
 func _on_button_c_up_pressed() -> void:
 	Input.action_press("rotate_up")
 
 
+## [c-up] button is _released_.
 func _on_button_c_up_released() -> void:
 	Input.action_release("rotate_up")
 
+
+## [l] button is _pressed_.
 func _on_button_r_pressed() -> void:
 	Input.action_press("hold")
 
-
+## [l] button is _released_.
 func _on_button_r_released() -> void:
 	Input.action_release("hold")

@@ -16,6 +16,8 @@ var drag_plane_normal = Vector3.ZERO
 var zoom_level: int = 0
 var last_touch_pos = Vector2.ZERO
 
+
+## Called once for every event before _unhandled_input(), allowing you to consume some events.
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		reset_mesh()
@@ -124,53 +126,138 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom"):
 		switch_zoom_level()
 
+
+## Called every frame. '_delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+
+	# Check if the animation player is not playing
 	if not animation_player.is_playing():
+
+		# Play the "idle" animation
 		animation_player.play("idle")
+
+	# [rotate_down] action is _pressed_
 	if Input.is_action_pressed("rotate_down"):
+		# Rotate the mesh downwards
 		rotation.x += delta * 2
+
+	# [rotate_left] action is _pressed_
 	if Input.is_action_pressed("rotate_left"):
+
+		# Rotate the mesh to the left
 		rotation.y -= delta * 2
+
+	# [rotate_right] action is _pressed_
 	if Input.is_action_pressed("rotate_right"):
+
+		# Rotate the mesh to the right
 		rotation.y += delta * 2
+
+	# [rotate_up] action is _pressed_
 	if Input.is_action_pressed("rotate_up"):
+
+		# Rotate the mesh upwards
 		rotation.x -= delta * 2
 
+
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+	# Get the mesh arrays
 	for surface_idx in range(mesh_instance.mesh.get_surface_count()):
+
+		# Get the surface arrays
 		var surface_arrays = mesh_instance.mesh.surface_get_arrays(surface_idx)
+
+		# Append the surface arrays to the mesh arrays
 		mesh_arrays.append(surface_arrays)
+
+		# Append the surface vertices to the original vertices
 		original_vertices.append(surface_arrays[Mesh.ARRAY_VERTEX].duplicate())
+
+		# Append the surface material to the original materials
 		original_materials.append(mesh_instance.mesh.surface_get_material(surface_idx))
 
+
+## Gets the distance from a point to a ray.
 func get_distance_to_ray(point: Vector3, ray_origin: Vector3, ray_end: Vector3) -> float:
+
+	# Calculate the ray direction
 	var ray_direction = (ray_end - ray_origin).normalized()
+
+	# Calculate the vector from the ray origin to the point
 	var v = point - ray_origin
+
+	# Calculate the distance from the point to the ray
 	var t = v.dot(ray_direction)
+
+	# Calculate the closest point on the ray to the point
 	var p = ray_origin + t * ray_direction
+
+	# Return the distance from the point to the closest point on the ray
 	return point.distance_to(p)
 
+## Resets the mesh to its original state.
 func reset_mesh() -> void:
+
+	# Get the mesh arrays
 	for surface_idx in range(mesh_arrays.size()):
+
+		# Get the surface arrays
 		var surface_arrays = mesh_arrays[surface_idx]
+
+		# Reset the surface vertices to the original vertices
 		surface_arrays[Mesh.ARRAY_VERTEX] = original_vertices[surface_idx].duplicate()
+
+		# Update the mesh arrays
 		mesh_arrays[surface_idx] = surface_arrays
 	
+	# Update the mesh
 	update_mesh()
+
+	# Reset the dragging state
 	is_dragging = false
+
+	# Clear the grabbed vertices
 	grabbed_vertices.clear()
 
+
+## Updates the mesh with the new arrays.
 func update_mesh() -> void:
+
+	# Create a new mesh for the updated arrays
 	var new_mesh = ArrayMesh.new()
+
+	# Get the mesh arrays
 	for idx in range(mesh_arrays.size()):
+	
+		# Add the surface from the arrays
 		new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays[idx])
+
+		# Set the original material for the surface
 		new_mesh.surface_set_material(idx, original_materials[idx])
+
+	# Set the new mesh for the mesh instance
 	mesh_instance.mesh = new_mesh
 
+
+## Switches the zoom level of the mesh.
 func switch_zoom_level() -> void:
+
+	# Check if the zoom level is less than 2
 	if zoom_level < 2:
+
+		# Change the zoom level
 		zoom_level += 1
+
+		# Change the position
 		position.z -= 0.2
+
+	# Otherwise, reset the zoom level
 	else:
+
+		# Reset the zoom level
 		zoom_level = 0
+
+		# Reset the position
 		position.z += 0.4
